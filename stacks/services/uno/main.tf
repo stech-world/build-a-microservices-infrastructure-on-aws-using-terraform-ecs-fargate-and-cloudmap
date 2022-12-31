@@ -16,7 +16,7 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "default"
+  profile = "<YOUR AWS PROFILE NAME>"
 }
 
 
@@ -153,7 +153,7 @@ resource "aws_ecs_task_definition" "fgms_uno_td" {
         memory : 512,
         name : "fgms-uno",
         networkMode : "awsvpc",
-        environment:[
+        environment : [
           {
             name : "DUE_SERVICE_API_BASE",
             value : "http://${data.terraform_remote_state.services-due.outputs.fgms_due_service_namespace}.${data.terraform_remote_state.dns.outputs.fgms_private_dns_namespace}"
@@ -169,12 +169,12 @@ resource "aws_ecs_task_definition" "fgms_uno_td" {
             hostPort : 3000
           }
         ],
-        logConfiguration: {
-          logDriver: "awslogs",
-          options: {
-            awslogs-group: "/ecs/fgms_log_group",
-            awslogs-region: "eu-west-1",
-            awslogs-stream-prefix: "uno"
+        logConfiguration : {
+          logDriver : "awslogs",
+          options : {
+            awslogs-group : "/ecs/fgms_log_group",
+            awslogs-region : "eu-west-1",
+            awslogs-stream-prefix : "uno"
           }
         }
       }

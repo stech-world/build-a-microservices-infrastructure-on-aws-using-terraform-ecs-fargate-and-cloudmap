@@ -16,7 +16,7 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "default"
+  profile = "<YOUR AWS PROFILE NAME>"
 }
 
 
@@ -30,14 +30,6 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-# data "terraform_remote_state" "alb" {
-#   backend = "s3"
-#   config = {
-#     bucket = "fgms-infra"
-#     key    = "alb.tfstate"
-#     region = "eu-west-1"
-#   }
-# }
 
 resource "aws_service_discovery_private_dns_namespace" "fgms_dns_discovery" {
   name        = var.fgms_private_dns_namespace

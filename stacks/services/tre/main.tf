@@ -16,7 +16,7 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "default"
+  profile = "<YOUR AWS PROFILE NAME>"
 }
 
 
@@ -165,9 +165,9 @@ resource "aws_security_group" "ecs_tasks_sg_tre" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.fgms_vpc_id
 
   ingress {
-    protocol        = "tcp"
-    from_port       = "3000"
-    to_port         = "3000"
+    protocol    = "tcp"
+    from_port   = "3000"
+    to_port     = "3000"
     cidr_blocks = ["10.0.0.0/16"]
   }
 
@@ -192,7 +192,7 @@ resource "aws_service_discovery_service" "fgms_tre_service" {
   name = var.fgms_tre_service_namespace
 
   dns_config {
-    namespace_id = "${data.terraform_remote_state.dns.outputs.fgms_dns_discovery_id}"
+    namespace_id = data.terraform_remote_state.dns.outputs.fgms_dns_discovery_id
 
     dns_records {
       ttl  = 10
